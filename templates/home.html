@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> HA! </title>
+</head>
+<body>
+{#    <form action="">#}
+{#        <label for="{{ form.name.id_for_label }}">Name:</label>#}
+{#        <p>{{ form.name }}</p>#}
+{#        <small>{{ form.name.help_text }}</small>#}
+{##}
+{#        <label for="{{ form.age.id_for_label }}">Age:</label>#}
+{#        <p>{{ form.age }}</p>#}
+{#        <small>{{ form.age.help_text }}</small>#}
+{##}
+{#        <label for="{{ form.birth.id_for_label }}">Birth:</label>#}
+{#        <p>{{ form.birth }}</p>#}
+{#        <small>{{ form.birth.help_text }}</small>#}
+{#    </form>#}
+    <br>
+
+    {% if is_valid %}
+        <h3> Successful! </h3>
+    {% else %}
+        <h3> Error! </h3>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.name|capfirst }}</label>
+            <p>{{ field }}</p>
+            <small>{{ field.help_text }}</small>
+        {% endfor %}
+        <ul>
+            {% for error in form.errors %}
+                <li style="color:red"> {{ error }}</li>
+            {% endfor %}
+        </ul>
+
+
+
+        <input type="submit">
+    </form>
+
+</body>
+</html>
